@@ -68,18 +68,19 @@
         <p>An HTML form is made of one or more widgets. Those widgets can be text fields (single line or multiline),
         select boxes, buttons, checkboxes or radio buttons.</p>
         <h2>Example</h2>
-            <form>
-                <label>Username</label>
-                <input type="text" name="username"><br />
-                <label>Password</label>
-                <input type="text" name="password"><br />
-                <label>Email</label>
-                <input type="text" name="email"><br />
-                <label>Age</label>
-                <input type="radio" name="under20" value="male">Under 20
-                <input type="radio" name="20andmore" value="female">20 and more<br>
-                <button type="submit">Submit</button>
-            </form>
+        <form>
+            <label for="username">Username</label>
+            <input type="text" id="username"><br />
+            <label for="password">Password</label>
+            <input type="text" id="password"><br />
+            <label for="email">Email</label>
+            <input type="text" id="email"><br />
+            <label>Age</label>
+            <input type="radio" name="age" value="male">Under 20
+            <input type="radio" name="age" value="female">20 and more<br>
+            <button type="submit">Submit</button>
+            <button type="reset">Reset</button>
+        </form>
         <img src="pic3.png" alt="form-pic"/>
         <p>Form icon link <a href="pic3.png">HERE</a></p>
     </div>
