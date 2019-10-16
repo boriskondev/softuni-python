@@ -17,3 +17,19 @@ img {
     max-width:100%;
     align: middle;
 }
+
+h1{
+    color: blue
+}
+
+p{
+    color: darkviolet
+}
+
+li{
+    border: 1px yellow solid
+}
+
+span{
+    border: 1px darkcyan dotted
+}
