@@ -3,22 +3,25 @@ kate_coordinates = ""
 already_visited = []
 
 
-def up(array, coordinates, already_been, moves):
-    row = coordinates[0] - 1
-    column = coordinates[1]
-    if row >= 0:
-        step_up = array[row][column]
+def up(array, coordinates, already_been, moves, game_exit):
+    r = coordinates[0] - 1
+    c = coordinates[1]
+    if r > 0:
+        step_up = array[r][c]
         if step_up != "#" and step_up not in already_been:
+            array[r][c] = "k"
             array[coordinates[0]][coordinates[1]] = " "
-            array[row][column] = "k"
-            coordinates = (row, column)
+            coordinates = (r, c)
             already_been.append(coordinates)
-            return array, coordinates, already_been
-        # somewhere - check if new_coords x is 0 - if exit == True and moves += 1
-        else:
-            return False
+            moves += 1
+            return array, coordinates, already_been, moves, game_exit
+    elif r == 0:
+        game_exit = True
+        moves += 1
+        return array, coordinates, already_been, moves, game_exit
     else:
         return False
+
 
 rows = int(input())
 
