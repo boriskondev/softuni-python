@@ -20,16 +20,12 @@ def move_down(playground, player_coordinates, visited_coordinates):
             return False
 
 
-array = []
 kate_coordinates = (0, 0)
 already_visited = []
 moves = 0
 out = False
 
-rows = int(input())
-
-for row in range(rows):
-    array.append(list(input()))
+array = [list(input()) for row in range(int(input()))]
 
 row_count = 0
 for row in array:
