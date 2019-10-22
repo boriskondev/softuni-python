@@ -2,24 +2,6 @@ array = []
 kate_coordinates = ""
 already_visited = []
 
-
-def up(array, coordinates, already_been, moves):
-    row = coordinates[0] - 1
-    column = coordinates[1]
-    if row >= 0:
-        step_up = array[row][column]
-        if step_up != "#" and step_up not in already_been:
-            array[coordinates[0]][coordinates[1]] = " "
-            array[row][column] = "k"
-            coordinates = (row, column)
-            already_been.append(coordinates)
-            return array, coordinates, already_been
-        # somewhere - check if new_coords x is 0 - if exit == True and moves += 1
-        else:
-            return False
-    else:
-        return False
-
 rows = int(input())
 
 for row in range(rows):
@@ -35,8 +17,30 @@ for row in array:
         col_count += 1
     row_count += 1
 
-moves = 0
+print(len(array))
 
-try_up = up(array, kate_coordinates, already_visited, moves)
-if try_up:
-    kate_coordinates = try_up
+
+
+
+
+
+
+'''
+def move_up(playground, player_coordinates, visited_coordinates):
+    up_row = player_coordinates[0] - 1
+    column = player_coordinates[1]
+    if up_row >= 0:
+        step_up = playground[up_row][column]
+        if step_up != "#" and step_up not in visited_coordinates:
+            playground[up_row][column] = "k"
+            playground[player_coordinates[0]][player_coordinates[1]] = " "
+            player_coordinates = (up_row, column)
+            visited_coordinates.append(player_coordinates)
+
+            return playground, player_coordinates, visited_coordinates
+    elif up_row == 0:
+        game_exit = True
+        return playground, player_coordinates, visited_coordinates
+    else:
+        return False
+'''

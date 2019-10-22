@@ -1,27 +1,30 @@
+def move_up(playground, player_coordinates, visited_coordinates):
+    up_row = player_coordinates[0] - 1
+    col = player_coordinates[1]
+    if up_row >= 0:
+        step_up = playground[up_row][col]
+        if step_up != "#" and step_up not in visited_coordinates:
+            return True
+        else:
+            return False
+
+
+def move_down(playground, player_coordinates, visited_coordinates):
+    down_row = player_coordinates[0] + 1
+    col = player_coordinates[1]
+    if down_row <= len(playground) - 1:
+        step_down = playground[down_row][col]
+        if step_down != "#" and step_down not in visited_coordinates:
+            return True
+        else:
+            return False
+
+
 array = []
-kate_coordinates = ""
+kate_coordinates = (0, 0)
 already_visited = []
-
-
-def up(array, coordinates, already_been, moves, game_exit):
-    r = coordinates[0] - 1
-    c = coordinates[1]
-    if r > 0:
-        step_up = array[r][c]
-        if step_up != "#" and step_up not in already_been:
-            array[r][c] = "k"
-            array[coordinates[0]][coordinates[1]] = " "
-            coordinates = (r, c)
-            already_been.append(coordinates)
-            moves += 1
-            return array, coordinates, already_been, moves, game_exit
-    elif r == 0:
-        game_exit = True
-        moves += 1
-        return array, coordinates, already_been, moves, game_exit
-    else:
-        return False
-
+moves = 0
+out = False
 
 rows = int(input())
 
@@ -29,17 +32,36 @@ for row in range(rows):
     array.append(list(input()))
 
 row_count = 0
-
 for row in array:
+    kate_found = False
     col_count = 0
-    for col in row:
-        if col == "k":
+    for column in row:
+        if column == "k":
             kate_coordinates = (row_count, col_count)
+            kate_found = True
+            break
         col_count += 1
+    if kate_found:
+        break
     row_count += 1
 
-moves = 0
 
-try_up = up(array, kate_coordinates, already_visited, moves)
-if try_up:
-    kate_coordinates = try_up
+while True:
+    if move_up(array, kate_coordinates, already_visited):
+        row = kate_coordinates[0]
+        column = kate_coordinates[1]
+        array[row][column] = " "
+        array[row-1][column] = "k"
+        kate_coordinates = (row-1, column)
+        moves += 1
+        already_visited.append(kate_coordinates)
+        if row - 1 == 0:
+            moves += 1
+            out = True
+            break
+        continue
+    elif move_down(array, kate_coordinates, already_visited):
+        pass
+
+if out:
+    print(f"Kate got out in {moves} moves")
