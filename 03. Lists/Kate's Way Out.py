@@ -69,6 +69,10 @@ for new_row in array:
 
 already_visited.append(kate_coordinates)
 
+if kate_coordinates[1] == 0:
+    print("Kate got out in 1 moves")
+    exit(0)
+
 while True:
     if move_up(array, kate_coordinates, already_visited):
         new_row = kate_coordinates[0] - 1
@@ -82,8 +86,6 @@ while True:
             moves += 1
             out = True
             break
-        [print("".join(r)) for r in array]
-        print()
     elif move_right(array, kate_coordinates, already_visited):
         row = kate_coordinates[0]
         new_col = kate_coordinates[1] + 1
@@ -96,8 +98,6 @@ while True:
             moves += 1
             out = True
             break
-        [print("".join(r)) for r in array]
-        print()
     elif move_down(array, kate_coordinates, already_visited):
         new_row = kate_coordinates[0] + 1
         column = kate_coordinates[1]
@@ -110,8 +110,6 @@ while True:
             moves += 1
             out = True
             break
-        [print("".join(r)) for r in array]
-        print()
     elif move_left(array, kate_coordinates, already_visited):
         row = kate_coordinates[0]
         new_col = kate_coordinates[1] - 1
@@ -124,14 +122,9 @@ while True:
             moves += 1
             out = True
             break
-        [print("".join(r)) for r in array]
-        print()
     else:
         print("Kate cannot get out")
         break
 
-
-[print("".join(r)) for r in array]
-print()
 if out:
     print(f"Kate got out in {moves} moves")
