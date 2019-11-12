@@ -1,7 +1,3 @@
-# Problem after entering in game 2 (replay)
-# After second turn ask if you want to start again
-
-
 def show_game_board(playing_board):
     for row in playing_board:
         for column in row:
@@ -44,7 +40,7 @@ def check_column_win(playing_board):
         column = [row[i] for row in playing_board]
         if len(set(column)) == 1 and "-" not in column:
             return True
-        return False
+    return False
 
 
 def check_diagonal_win(playing_board):
@@ -74,7 +70,7 @@ def yes_or_no():
     elif user_input in negatives:
         return "no"
     else:
-        print("Not a valid answer. Try again.", end=" ")
+        print("Not a valid answer. Try again.")
         return yes_or_no()
 
 
@@ -107,10 +103,12 @@ while True:
         print("Do you want to play again?")
         answer = yes_or_no()
         if answer == "yes":
+            turns = 0
+            winner = False
+            draw = False
             board = [["-", "-", "-"], ["-", "-", "-"], ["-", "-", "-"]]
             print()
             show_game_board(board)
-            turns = 0
             continue
         else:
             print("See you next time!")
