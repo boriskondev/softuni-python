@@ -1,3 +1,19 @@
+import time
+
+
+def show_rules():
+    rules = ["- The game is played by two players on a 3 by 3 squares grid;",
+             "- Each player puts a sign in an empty square (\"X\" for the first player, \"O\" for the second);",
+             "- The first player to get 3 of their signs in row, column or a diagonal wins;",
+             "- If all 9 squares are filled and there is no winner, the game ends in a draw."]
+    print("Here they are:")
+    time.sleep(1.5)
+    for rule in rules:
+        print(rule)
+        time.sleep(3)
+    time.sleep(1.5)
+
+
 def show_game_board(playing_board):
     for row in playing_board:
         for column in row:
@@ -6,31 +22,23 @@ def show_game_board(playing_board):
     print()
 
 
-def take_turn():
-    desired_row = int(input("Choose row: "))
-    desired_column = int(input("Choose column: "))
-    desired_row_index = desired_row - 1
-    desired_column_index = desired_column - 1
-    coordinates = desired_row_index, desired_column_index
-    return coordinates
-
-
-def check_player_turn(playing_board, coordinates):
-    player_row_index = coordinates[0]
-    player_column_index = coordinates[1]
-    if 0 <= player_row_index <= 2 and 0 <= player_column_index <= 2:
-        if playing_board[player_row_index][player_column_index] == "-":
+def take_turn_and_validate(playing_board):
+    row = int(input("Choose row: "))
+    column = int(input("Choose column: "))
+    row_index = row - 1
+    column_index = column - 1
+    if 0 <= row_index <= 2 and 0 <= column_index <= 2:
+        if playing_board[row_index][column_index] == "-":
             print()
-            return coordinates
-    print("Not a valid move. Try again.")
+            return row_index, column_index
+    print("Not a valid turn. Try again with correct coordinates.")
     print()
-    return check_player_turn(playing_board, take_turn())
+    return take_turn_and_validate(playing_board)
 
 
 def check_row_win(playing_board):
     for row in playing_board:
         if len(set(row)) == 1 and "-" not in row:
-            print(set(row))
             return True
     return False
 
@@ -56,7 +64,9 @@ def check_diagonal_win(playing_board):
                 right_diagonal.append(row[i])
         left_counter += 1
         right_counter -= 1
-    if len(set(left_diagonal)) == 1 and "-" not in left_diagonal or len(set(right_diagonal)) == 1 and "-" not in right_diagonal:
+    if len(set(left_diagonal)) == 1 and "-" not in left_diagonal:
+        return True
+    elif len(set(right_diagonal)) == 1 and "-" not in right_diagonal:
         return True
     return False
 
@@ -74,20 +84,35 @@ def yes_or_no():
         return yes_or_no()
 
 
-board = [["-", "-", "-"], ["-", "-", "-"], ["-", "-", "-"]]
 players = [1, 2]
+board = [["-", "-", "-"], ["-", "-", "-"], ["-", "-", "-"]]
 winner = False
 draw = False
 turns = 0
+
+print("Welcome to the good old game of Tic-Tac-Toe!")
+time.sleep(2)
+print("Do you want to see the rules first?")
+answer = yes_or_no()
+if answer == "yes":
+    show_rules()
+
+print()
+print("OK, let's kick it!")
+print("Here is the board:")
+print()
+time.sleep(1)
 
 show_game_board(board)
 
 while True:
     for player in players:
-        print(f"Player {player} turn:")
-        turn_coordinates = take_turn()
-        correct_coordinates = check_player_turn(board, turn_coordinates)
-        board[correct_coordinates[0]][correct_coordinates[1]] = str(player)
+        print(f"Turn of player {player}:")
+        coordinates = take_turn_and_validate(board)
+        if player == 1:
+            board[coordinates[0]][coordinates[1]] = "X"
+        else:
+            board[coordinates[0]][coordinates[1]] = "O"
         show_game_board(board)
         turns += 1
         if check_row_win(board) or check_column_win(board) or check_diagonal_win(board):
@@ -103,10 +128,10 @@ while True:
         print("Do you want to play again?")
         answer = yes_or_no()
         if answer == "yes":
-            turns = 0
+            board = [["-", "-", "-"], ["-", "-", "-"], ["-", "-", "-"]]
             winner = False
             draw = False
-            board = [["-", "-", "-"], ["-", "-", "-"], ["-", "-", "-"]]
+            turns = 0
             print()
             show_game_board(board)
             continue
