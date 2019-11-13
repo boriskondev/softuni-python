@@ -1,6 +1,19 @@
 import time
 
 
+def yes_or_no():
+    positives = ["yes", "ye", "y"]
+    negatives = ["no", "n"]
+    user_input = input("Yes/No: ").lower()
+    if user_input in positives:
+        return "yes"
+    elif user_input in negatives:
+        return "no"
+    else:
+        print("Not a valid answer. Try again.")
+        return yes_or_no()
+
+
 def show_rules():
     rules = ["- The game is played by two players on a 3 by 3 squares grid;",
              "- Each player puts a sign in an empty square (\"X\" for the first player, \"O\" for the second);",
@@ -11,7 +24,7 @@ def show_rules():
     for rule in rules:
         print(rule)
         time.sleep(3)
-    time.sleep(1.5)
+    time.sleep(5)
 
 
 def show_game_board(playing_board):
@@ -31,7 +44,7 @@ def take_turn_and_validate(playing_board):
         if playing_board[row_index][column_index] == "-":
             print()
             return row_index, column_index
-    print("Not a valid turn. Try again with correct coordinates.")
+    print("Not a valid turn. Try again with correct cell coordinates.")
     print()
     return take_turn_and_validate(playing_board)
 
@@ -71,19 +84,6 @@ def check_diagonal_win(playing_board):
     return False
 
 
-def yes_or_no():
-    positives = ["yes", "ye", "y"]
-    negatives = ["no", "n"]
-    user_input = input("Yes/No: ").lower()
-    if user_input in positives:
-        return "yes"
-    elif user_input in negatives:
-        return "no"
-    else:
-        print("Not a valid answer. Try again.")
-        return yes_or_no()
-
-
 players = [1, 2]
 board = [["-", "-", "-"], ["-", "-", "-"], ["-", "-", "-"]]
 winner = False
@@ -99,11 +99,13 @@ if answer == "yes":
 
 print()
 print("OK, let's kick it!")
-print("Here is the board:")
+print("This is the playing board:")
 print()
 time.sleep(1)
 
 show_game_board(board)
+
+time.sleep(2)
 
 while True:
     for player in players:
