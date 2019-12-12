@@ -34,4 +34,5 @@ else:
 # image of the program
 # program load, then a certain wait before everything
 # a button OPEN?
+# to save the file in the location where the original one is
 
