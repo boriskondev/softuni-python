@@ -9,7 +9,8 @@ times_found = 0
 
 application_window = Tk()
 
-chosen_file = filedialog.askopenfilename(parent=application_window, title="Please select a file:", filetypes=(("Word files", "*.docx"),))
+chosen_file = filedialog.askopenfilename(parent=application_window, title="Please select a file:",
+                                         filetypes=(("Word files", "*.docx"),))
 
 path_to_file = Path(chosen_file)
 
@@ -23,10 +24,14 @@ for paragraph in paragraphs:
 
 if times_found == 0:
     messagebox.showinfo("Статус", "Не открих нищо!")
-
 else:
     messagebox.showinfo("Статус", f"Открити са {times_found} ударени и-та!"
                                   f"\nВ същата папка ще откриеш нов файл с маркираните места.")
     file_name = path_to_file.stem
     doc.save(f"{file_name}_processed.docx")
+
+# check if found = 1
+# image of the program
+# program load, then a certain wait before everything
+# a button OPEN?
 
