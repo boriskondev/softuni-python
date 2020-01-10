@@ -1,22 +1,6 @@
 from itertools import combinations
 
-participants = int(input("How many are you? "))
-
-names = []
-
-for participant in range(1, participants + 1):
-    name = input(f"Name of person {participant}: ")
-    names.append(name)
-
-
-for combination in list(combinations(names, 2)):
-    print(combination)
-
-
-'''
-from itertools import combinations
-
-how_many = int(input("How many are you? "))
+how_many = int(input("How many people are you? "))
 
 people = {}
 
@@ -26,13 +10,12 @@ for i in range(1, how_many + 1):
     people[name] = expense
 
 
-for names in combinations(people.keys(), 2):
-    first_taking = people[names[0]] / how_many
-    second_taking = people[names[1]] / how_many
-    if first_taking > second_taking:
-        print(f"{names[0]} should take {(first_taking - second_taking):.2f} from {names[1]}.")
-    elif second_taking > first_taking:
-        print(f"{names[1]} should take {(second_taking - first_taking):.2f} from {names[0]}.")
+for first, second in combinations(people.keys(), 2):
+    first_takes = people[first] / how_many
+    second_takes = people[second] / how_many
+    if first_takes > second_takes:
+        print(f"{first} should take {(first_takes - second_takes):.2f} from {second}.")
+    elif second_takes > first_takes:
+        print(f"{second} should take {(second_takes - first_takes):.2f} from {first}.")
     else:
-        print(f"{names[0]} and {names[1]} are equal.")
-'''
+        print(f"{first} and {second} are clear. No one owes anything.")
