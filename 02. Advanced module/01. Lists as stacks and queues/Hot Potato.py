@@ -8,8 +8,13 @@ queue = deque()
 hot_potato = int(input())
 
 while queue:
+    if len(queue) == 1:
+        break
     counter += 1
     if counter % hot_potato == 0:
-        queue.popleft()
+        print(f"Removed {queue.popleft()}")
     else:
-        pass
+        person = queue.popleft()
+        queue.append(person)
+
+print(f"Last is {queue.popleft()}")
