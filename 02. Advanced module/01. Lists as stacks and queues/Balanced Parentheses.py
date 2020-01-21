@@ -19,7 +19,6 @@ for el in range(len(parentheses)):
         else:
             not_found = True
             break
-
     else:
         not_found = True
         break
