@@ -1,6 +1,6 @@
 parentheses = input()
 
-not_found = False
+not_valid = False
 
 stack = []
 
@@ -13,18 +13,22 @@ for el in range(len(parentheses)):
     if parentheses[el] in "{[(":
         stack.append(parentheses[el])
     elif parentheses[el] in ")]}":
-        last = stack[-1]
-        if parentheses[el] == pairs[last]:
-            stack.pop()
+        if stack:
+            last = stack[-1]
+            if parentheses[el] == pairs[last]:
+                stack.pop()
+            else:
+                not_valid = True
+                break
         else:
-            not_found = True
+            not_valid = True
             break
 
     else:
-        not_found = True
+        not_valid = True
         break
 
-if not_found:
+if not_valid:
     print("NO")
 else:
     print("YES")
