@@ -4,10 +4,10 @@ not_valid = False
 
 stack = []
 
-pairs = {"{": "}",
+pairs_dict = {"{": "}",
          "[": "]",
          "(": ")"
-         }
+              }
 
 for el in range(len(parentheses)):
     if parentheses[el] in "{[(":
@@ -15,7 +15,7 @@ for el in range(len(parentheses)):
     elif parentheses[el] in ")]}":
         if stack:
             last = stack[-1]
-            if parentheses[el] == pairs[last]:
+            if parentheses[el] == pairs_dict[last]:
                 stack.pop()
             else:
                 not_valid = True
