@@ -2,14 +2,13 @@ from collections import deque
 
 not_enough = False
 orders_counter = 0
-biggest_order = 0
 
 food_quantity = int(input())
-
 queue = deque(map(int, input().split()))
+biggest_order = max(queue)
 
 while True:
-    if food_quantity >= queue[-1]:
+    if food_quantity >= queue[0]:
         food = queue.popleft()
         food_quantity -= food
         if food > biggest_order:

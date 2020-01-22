@@ -23,7 +23,6 @@ for el in range(len(parentheses)):
         else:
             not_valid = True
             break
-
     else:
         not_valid = True
         break
