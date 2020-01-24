@@ -30,14 +30,13 @@ while True:
         if len(command[1:]) != 4:
             print("Invalid input!")
         else:
-            coordinates = [int(x) for x in command[1:]]
-            if valid_row(coordinates[0], rows) and valid_row(coordinates[2], rows) and \
-                    valid_col(coordinates[1], columns) and valid_col(coordinates[3], columns):
-                matrix[coordinates[0]][coordinates[1]], matrix[coordinates[2]][coordinates[3]] = \
-                    matrix[coordinates[2]][coordinates[3]], matrix[coordinates[0]][coordinates[1]]
+            coords = [int(x) for x in command[1:]]
+            if valid_row(coords[0], rows) and valid_row(coords[2], rows) and \
+                    valid_col(coords[1], columns) and valid_col(coords[3], columns):
+                matrix[coords[0]][coords[1]], matrix[coords[2]][coords[3]] = \
+                    matrix[coords[2]][coords[3]], matrix[coords[0]][coords[1]]
                 print_matrix(matrix)
             else:
                 print("Invalid input!")
-
     else:
         print("Invalid input!")

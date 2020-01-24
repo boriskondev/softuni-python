@@ -3,15 +3,17 @@ from collections import deque
 matrix = []
 
 rows, columns = [int(x) for x in input().split()]
-snake = deque(list(input()))
+snake = deque(input())
 
-for row in range(rows):
+for row in range(1, rows + 1):
     matrix_row = []
     for col in range(columns):
         push = snake.popleft()
         matrix_row.append(push)
         snake.append(push)
-    matrix.append(matrix_row)
+    if row % 2 != 0:
+        matrix.append(matrix_row)
+    else:
+        matrix.append(matrix_row[::-1])
 
-for r in matrix:
-    print("".join(r))
+[print("".join(r)) for r in matrix]

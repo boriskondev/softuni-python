@@ -1,34 +1,21 @@
 matrix = []
-square_matrix = []
-current_sum = 0
-max_sum = 0
+current_sum, max_sum, max_row, max_col = 0, 0, 0, 0
 
-rows, columns = map(int, input().split())
+matrix_rows, matrix_cols = map(int, input().split())
 
-for row in range(rows):
+for row in range(matrix_rows):
     matrix.append(list(map(int, input().split())))
 
-for row in range(rows - 2):
-    for column in range(columns - 2):
-        top_left = matrix[row][column]
-        top_middle = matrix[row][column + 1]
-        top_right = matrix[row][column + 2]
-        top_sum = top_left + top_middle + top_right
-        middle_left = matrix[row + 1][column]
-        middle_middle = matrix[row + 1][column + 1]
-        middle_right = matrix[row + 1][column + 2]
-        middle_sum = middle_left + middle_middle + middle_right
-        down_left = matrix[row + 2][column]
-        down_middle = matrix[row + 2][column + 1]
-        down_right = matrix[row + 2][column + 2]
-        down_sum = down_left + down_middle + down_right
-        current_sum = top_sum + middle_sum + down_sum
+for row in range(matrix_rows - 2):
+    for col in range(matrix_cols - 2):
+        current_sum = sum([sum(sub_row[col:col + 3]) for sub_row in matrix[row:row + 3]])
         if current_sum > max_sum:
             max_sum = current_sum
-            square_matrix = [[top_left, top_middle, top_right],
-                             [middle_left, middle_middle, middle_right],
-                             [down_left, down_middle, down_right],]
+            max_row = row
+            max_col = col
 
 print(f"Sum = {max_sum}")
-for r in square_matrix:
-    print(" ".join(map(str, r)))
+for row in range(max_row, max_row + 3):
+    for col in range(max_col, max_col + 3):
+        print(matrix[row][col], end=" ")
+    print()
