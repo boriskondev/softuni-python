@@ -4,7 +4,7 @@ dead_cells = []
 
 
 def check_index(matrix_row, matrix_col, matrix):
-    if 0 <= matrix_row < len(matrix) and 0 <= matrix_col < len(matrix[0]):
+    if 0 <= matrix_row < len(matrix) and 0 <= matrix_col < len(matrix):
         return True
     return False
 
@@ -51,7 +51,8 @@ for c in input().split():
 
 for bomb_coordinate in bombs_coordinates:
     if bomb_coordinate not in dead_cells:
-        detonate(bomb_coordinate, bomb_field)
+        if check_index(bomb_coordinate[0], bomb_coordinate[1], bomb_field):
+            detonate(bomb_coordinate, bomb_field)
 
 alive = []
 
@@ -59,8 +60,6 @@ for row in range(len(bomb_field)):
     for col in range(len(bomb_field)):
         if bomb_field[row][col] > 0:
             alive.append(bomb_field[row][col])
-
-print(dead_cells)
 
 print(f"Alive cells: {len(alive)}")
 print(f"Sum: {sum(alive)}")
