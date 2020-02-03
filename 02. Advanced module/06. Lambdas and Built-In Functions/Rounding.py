@@ -1,0 +1,1 @@
+print([round(x) for x in list(map(float, input().split()))])
