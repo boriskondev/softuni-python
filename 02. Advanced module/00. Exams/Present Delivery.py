@@ -1,6 +1,7 @@
 def print_matrix(array):
     for r in array:
         print(" ".join(r))
+    print()
 
 
 def check_index(matrix_row, matrix_col, array):
@@ -15,8 +16,8 @@ def award_everyone(matrix_row, matrix_col, array, gifts):
             if array[r][c] == "V" or array[r][c] == "X":
                 gifts -= 1
                 array[r][c] = "-"
-                # print_matrix(array)
-                # print()
+    print_matrix(array)
+    print()
 
 
 def move_up(matrix_row, matrix_col, array, gifts):
@@ -31,8 +32,68 @@ def move_up(matrix_row, matrix_col, array, gifts):
         elif array[matrix_row - 1][matrix_col] == "C":
             array[matrix_row - 1][matrix_col] = "S"
             array[matrix_row][matrix_col] = "-"
-            # print_matrix(array)
-            # award_everyone(matrix_row, matrix_col, array, gifts)
+            award_everyone(matrix_row, matrix_col, array, gifts)
+        elif array[matrix_row - 1][matrix_col] == "-":
+            array[matrix_row - 1][matrix_col] = "S"
+            array[matrix_row][matrix_col] = "-"
+        print_matrix(array)
+
+
+def move_right(matrix_row, matrix_col, array, gifts):
+    if check_index(matrix_row, matrix_col + 1, array):
+        if array[matrix_row][matrix_col + 1] == "V":
+            gifts -= 1
+            array[matrix_row][matrix_col + 1] = "S"
+            array[matrix_row][matrix_col] = "-"
+        elif array[matrix_row][matrix_col + 1] == "X":
+            array[matrix_row][matrix_col + 1] = "S"
+            array[matrix_row][matrix_col] = "-"
+        elif array[matrix_row][matrix_col + 1] == "C":
+            array[matrix_row][matrix_col + 1] = "S"
+            array[matrix_row][matrix_col] = "-"
+            award_everyone(matrix_row, matrix_col, array, gifts)
+        elif array[matrix_row][matrix_col + 1] == "-":
+            array[matrix_row][matrix_col + 1] = "S"
+            array[matrix_row][matrix_col] = "-"
+        print_matrix(array)
+
+
+def move_down(matrix_row, matrix_col, array, gifts):
+    if check_index(matrix_row + 1, matrix_col, array):
+        if array[matrix_row + 1][matrix_col] == "V":
+            gifts -= 1
+            array[matrix_row + 1][matrix_col] = "S"
+            array[matrix_row][matrix_col] = "-"
+        elif array[matrix_row + 1][matrix_col] == "X":
+            array[matrix_row + 1][matrix_col] = "S"
+            array[matrix_row][matrix_col] = "-"
+        elif array[matrix_row + 1][matrix_col] == "C":
+            array[matrix_row + 1][matrix_col] = "S"
+            array[matrix_row][matrix_col] = "-"
+            award_everyone(matrix_row, matrix_col, array, gifts)
+        elif array[matrix_row + 1][matrix_col] == "-":
+            array[matrix_row + 1][matrix_col] = "S"
+            array[matrix_row][matrix_col] = "-"
+        print_matrix(array)
+
+
+def move_left(matrix_row, matrix_col, array, gifts):
+    if check_index(matrix_row, matrix_col - 1, array):
+        if array[matrix_row][matrix_col - 1] == "V":
+            gifts -= 1
+            array[matrix_row][matrix_col - 1] = "S"
+            array[matrix_row][matrix_col] = "-"
+        elif array[matrix_row][matrix_col - 1] == "X":
+            array[matrix_row][matrix_col - 1] = "S"
+            array[matrix_row][matrix_col] = "-"
+        elif array[matrix_row][matrix_col - 1] == "C":
+            array[matrix_row][matrix_col - 1] = "S"
+            array[matrix_row][matrix_col] = "-"
+            award_everyone(matrix_row, matrix_col, array, gifts)
+        elif array[matrix_row][matrix_col - 1] == "-":
+            array[matrix_row][matrix_col - 1] = "S"
+            array[matrix_row][matrix_col] = "-"
+        print_matrix(array)
 
 
 count_of_presents = int(input())
@@ -40,6 +101,8 @@ neighbourhood_size = int(input())
 
 matrix = []
 santa_position = ()
+nice_kids = 0
+nice_kids_left = 0
 
 for _ in range(neighbourhood_size):
     matrix.append(input().split())
@@ -48,6 +111,8 @@ for row in range(len(matrix)):
     for col in range(len(matrix)):
         if matrix[row][col] == "S":
             santa_position = row, col
+        if matrix[row][col] == "V":
+            nice_kids += 1
 
 while True:
     command = input()
@@ -56,8 +121,28 @@ while True:
     elif command == "up":
         move_up(santa_position[0], santa_position[1], matrix, count_of_presents)
     elif command == "down":
-        pass
+        move_down(santa_position[0], santa_position[1], matrix, count_of_presents)
     elif command == "left":
-        pass
+        move_left(santa_position[0], santa_position[1], matrix, count_of_presents)
     elif command == "right":
-        pass
+        move_right(santa_position[0], santa_position[1], matrix, count_of_presents)
+    if count_of_presents == 0:
+        break
+    for row in range(len(matrix)):
+        for col in range(len(matrix)):
+            if matrix[row][col] == "S":
+                santa_position = row, col
+    for row in range(len(matrix)):
+        for col in range(len(matrix)):
+            if matrix[row][col] == "V":
+                nice_kids_left += 1
+    if nice_kids_left > 0 and count_of_presents == 0:
+        print("Santa ran out of presents!")
+
+
+print_matrix(matrix)
+
+if nice_kids_left == 0 and count_of_presents >= 0:
+    print(f"Good job, Santa! {nice_kids - nice_kids_left} happy nice kid/s.")
+else:
+    print(f"No presents for {nice_kids_left} nice kid/s.")
