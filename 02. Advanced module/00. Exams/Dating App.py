@@ -9,7 +9,10 @@ while males and females:
     if males[-1] <= 0:
         males.pop()
         continue
-    elif males[-1] % 25 == 0:
+    if females[0] <= 0:
+        females.popleft()
+        continue
+    if males[-1] % 25 == 0:
         if len(males) - 2 >= 2:
             males.pop()
             males.pop()
@@ -17,10 +20,7 @@ while males and females:
         else:
             males.pop()
             continue
-    if females[0] <= 0:
-        females.popleft()
-        continue
-    elif females[0] % 25 == 0:
+    if females[0] % 25 == 0:
         if len(females) >= 2:
             females.popleft()
             females.popleft()
@@ -28,18 +28,17 @@ while males and females:
         else:
             females.popleft()
             continue
-    if males and females:
-        if males[-1] == females[0]:
-            matches += 1
-            males.pop()
-            females.popleft()
-        else:
-            males[-1] -= 2
-            females.popleft()
+    if males[-1] == females[0]:
+        matches += 1
+        males.pop()
+        females.popleft()
+    else:
+        males[-1] -= 2
+        females.popleft()
 
 print(f"Matches: {matches}")
 if males:
-    print(f"Males left: {', '.join(str(x) for x in males)}")
+    print(f"Males left: {', '.join(str(x) for x in reversed(males))}")
 else:
     print(f"Males left: none")
 if females:
