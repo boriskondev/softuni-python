@@ -4,7 +4,8 @@ class Lion:
         self.gender = gender
         self.age = age
 
-    def get_needs(self):
+    @classmethod
+    def get_needs(cls):
         return 50
 
     def __repr__(self):
@@ -17,7 +18,8 @@ class Tiger:
         self.gender = gender
         self.age = age
 
-    def get_needs(self):
+    @classmethod
+    def get_needs(cls):
         return 45
 
     def __repr__(self):
@@ -30,7 +32,8 @@ class Cheetah:
         self.gender = gender
         self.age = age
 
-    def get_needs(self):
+    @classmethod
+    def get_needs(cls):
         return 60
 
     def __repr__(self):
