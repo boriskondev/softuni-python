@@ -118,6 +118,7 @@ class Zoo:
         if self.__budget >= total_needs:
             self.__budget -= total_needs
             return f"You tended all the animals. They are happy. Budget left: {self.__budget}"
+        return "You have no budget to tend the animals. They are unhappy."
 
     def profit(self, amount):
         self.__budget += amount
