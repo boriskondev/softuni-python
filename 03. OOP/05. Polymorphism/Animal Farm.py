@@ -47,7 +47,7 @@ class Animal(ABC):
         pass
 
 
-class Bird(Animal):
+class Bird(Animal, ABC):
     @abstractmethod
     def __init__(self, name, weight, wing_size):
         super().__init__(name, weight)
@@ -90,7 +90,7 @@ class Hen(Bird):
         return f"{self.__class__.__name__} [{self.name}, {self.wing_size}, {self.weight}, {self.food_eaten}]"
 
 
-class Mammal(Animal):
+class Mammal(Animal, ABC):
     @abstractmethod
     def __init__(self, name, weight, living_region):
         super().__init__(name, weight)
@@ -167,28 +167,4 @@ class Tiger(Mammal):
 
     def __repr__(self):
         return f"{self.__class__.__name__} [{self.name}, {self.weight}, {self.living_region}, {self.food_eaten}]"
-
-
-owl = Owl("Pip", 10, 10)
-print(owl)
-meat = Meat(4)
-print(owl.make_sound())
-owl.feed(meat)
-veg = Vegetable(1)
-print(owl.feed(veg))
-print(owl)
-
-
-hen = Hen("Harry", 10, 10)
-veg = Vegetable(3)
-fruit = Fruit(5)
-meat = Meat(1)
-print(hen)
-print(hen.make_sound())
-hen.feed(veg)
-hen.feed(fruit)
-hen.feed(meat)
-print(hen)
-
-
 
