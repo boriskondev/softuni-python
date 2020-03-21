@@ -1,4 +1,4 @@
-class SentenceIterator:
+class IterableObject:
     def __init__(self, string):
         self.string = string
         self.words = self.string.split()
@@ -15,13 +15,13 @@ class SentenceIterator:
         return self.words[index]
 
 
-def sentence_generator(string):
+def generator_function(string):
     for word in string.split():
         yield word
 
 
-my_sentence_iterator = SentenceIterator("This is a test")
-my_sentence_generator = sentence_generator("This is a test")
+my_sentence_iterator = IterableObject("This is a test")
+my_sentence_generator = generator_function("This is a test")
 
 for i in my_sentence_iterator:
     print(i)
