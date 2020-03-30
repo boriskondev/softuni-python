@@ -20,7 +20,7 @@ class Worker:
         self.energy += 1
 
     def get_info(self):
-        return (f'{self.name} has saved {self.money} money.')
+        return f'{self.name} has saved {self.money} money.'
 
 
 class WorkerTests(unittest.TestCase):
