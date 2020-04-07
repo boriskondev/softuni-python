@@ -22,7 +22,10 @@ class EasterShop:
 
     def make_chocolate(self, recipe: str):
         self.chocolate_factory.make_chocolate(recipe)
-        self.storage[recipe] = self.chocolate_factory.products[recipe]
+        if recipe not in self.storage:
+            self.storage[recipe] = 0
+        else:
+            self.storage[recipe] += 1
 
     def paint_egg(self, color: str, egg_type: str):
         if color in self.paint_factory.products and egg_type in self.egg_factory.products:
