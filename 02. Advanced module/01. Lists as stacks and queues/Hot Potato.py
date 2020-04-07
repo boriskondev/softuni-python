@@ -5,6 +5,7 @@ counter = 0
 queue = deque()
 
 [queue.append(name) for name in input().split()]
+
 hot_potato = int(input())
 
 while queue:

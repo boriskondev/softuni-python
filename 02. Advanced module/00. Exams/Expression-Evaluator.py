@@ -34,6 +34,7 @@ while initial_queue:
             initial_queue.pop()
             current_queue.insert(0, result)
         else:
+            current_queue.append(result)
             break
 
 print(current_queue[0])

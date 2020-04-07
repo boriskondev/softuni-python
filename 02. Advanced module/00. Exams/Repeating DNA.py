@@ -1,14 +1,14 @@
 def get_repeating_dna(sequence):
     matches = []
-    while len(sequence) > 20:
+    while len(sequence) > 10:
         sliced = sequence[:10]
         if sliced in sequence[1:] and sliced not in matches:
             matches.append(sliced)
-        sequence = sequence[10:]
+        sequence = sequence[1:]
     return matches
 
 
-test = input()
+test = "AAAAAACCCCAAAAAACCCCTTCAAAATCTTTCAAAATCT"
 
 result = get_repeating_dna(test)
 

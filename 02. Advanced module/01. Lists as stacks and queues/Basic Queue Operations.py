@@ -1,6 +1,5 @@
 from collections import deque
 
-
 elements_to_enqueue, elements_to_dequeue, to_look_for = map(int, input().split())
 
 queue = deque(map(int, input().split()))
