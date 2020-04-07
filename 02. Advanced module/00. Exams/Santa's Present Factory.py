@@ -49,7 +49,7 @@ else:
 if materials_stack:
     print("Materials left: " + ', '.join([str(x) for x in materials_stack[::-1]]))
 if magic_values_queue:
-    print("magic left: " + ', '.join([str(x) for x in magic_values_queue]))
+    print("Magic left: " + ', '.join([str(x) for x in magic_values_queue]))
 
 for item, quantity in sorted(crafted.items()):
     print(f"{item}: {quantity}")

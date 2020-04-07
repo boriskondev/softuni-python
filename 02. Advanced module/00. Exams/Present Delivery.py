@@ -49,7 +49,7 @@ def prepare_for_action(com, position, array, gifts, good_kids):
         new_row, new_col = position[0], position[1] - 1
     if check_index(new_row, new_col, array):
         position, array, gifts, good_kids = take_move(old_row, old_col, new_row, new_col, array, gifts, good_kids)
-        return position, array, gifts, good_kids
+    return position, array, gifts, good_kids
 
 
 def check_index(matrix_row, matrix_col, array):
@@ -121,3 +121,4 @@ if nice_kids_left == 0 and count_of_presents >= 0:
     print(f"Good job, Santa! {nice_kids} happy nice kid/s.")
 else:
     print(f"No presents for {nice_kids_left} nice kid/s.")
+  
