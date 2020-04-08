@@ -121,4 +121,3 @@ if nice_kids_left == 0 and count_of_presents >= 0:
     print(f"Good job, Santa! {nice_kids} happy nice kid/s.")
 else:
     print(f"No presents for {nice_kids_left} nice kid/s.")
-  
